@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.main')
 
-  <title>Новогодгий сайт</title>
-  @vite(['resources/styles/site/app.scss'])
-  @vite('resources/js/site/app.ts')
+@section('title', 'Ёлочный базар')
 
-
-</head>
-<body>
-</body>
-</html>
+@section('content')
+@endsection

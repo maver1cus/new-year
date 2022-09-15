@@ -1,0 +1,50 @@
+.promo {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 3rem);
+  min-height: 34rem;
+  margin: 0;
+  padding: 0;
+  background-image: url('../../images/bg-header.jpg');
+  background-size: cover;
+}
+
+.promo__top {
+  @include container;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.promo__link {
+  color: $white-color;
+  text-decoration: none;
+  font-size: 1.5625rem;
+
+  &--big {
+    font-size: 1.5625rem;
+  }
+}
+
+.promo__content {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0 0 10rem 0;
+  height: 100%;
+}
+
+.promo__title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  text-align: center;
+  color: $white-color;
+
+  b {
+    color: $accent-color;
+  }
+}

@@ -1,11 +1,16 @@
 <?php
 
-namespace App\View\Components\Layout;
+namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Header extends Component
+class MainMenu extends Component
 {
+  /**
+   * The alert message.
+   *
+   * @var array
+   */
   public $products;
 
   /**
@@ -25,6 +30,6 @@ class Header extends Component
    */
   public function render()
   {
-    return view('components.layout.header');
+    return view('components.main-menu');
   }
 }
