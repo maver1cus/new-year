@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="format-detection" content="telephone=no">
-  <link rel="shortcut icon" href="{{ Vite::asset('resources/images/favicon.png') }}" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
   <title>@yield('title')</title>
 
   <script
@@ -13,8 +13,7 @@
   ></script>
 
   @vite(['resources/styles/site/app.scss'])
-  @vite('resources/js/site/app.ts')
-
+  @vite(['resources/js/site/app.ts'])
 </head>
 <div class="out">
   <header class="page-header">
@@ -22,6 +21,7 @@
   </header>
   <main>
     <section class="promo">
+      <img src="resources/images/logo.png" alt="">
       <div class="promo__top">
         <a class="promo__link" href="mailto:vamsadik@mail.ru">vamsadik@mail.ru</a>
         <x-logo/>
