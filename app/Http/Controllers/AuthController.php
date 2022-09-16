@@ -1,79 +1,82 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+  public function __construct()
+  {
+    $this->middleware('auth:api', ['except' => ['login', 'register']]);
+  }
+
+  public function login()
+  {
+    $credentials = request(['email', 'password']);
+
+    $token = Auth::attempt($credentials);
+
+    if (!$token) {
+      return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
     }
 
-    public function login()
-    {
-        $credentials = request(['email', 'password']);
+    return $this->responWinthToken($token);
+  }
 
-        $token = Auth::attempt($credentials);
+  protected function responWinthToken($token)
+  {
+    return response()->json([
+      'access_token' => $token,
+      'token_type' => 'bearer',
+      'expires_in' => auth()->factory()->getTTL() * 60
+    ]);
+  }
 
-        if (!$token) {
-            return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
-        }
+  public function register(Request $request)
+  {
+    $validator = Validator::make($request->all(), [
+      'email' => 'required|string|email',
+      'password' => 'required|string|min:7',
+    ]);
 
-        return $this->responWinthToken($token);
+    if ($validator->fails()) {
+      return response(['error' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    public function register(Request $request){
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
-            'password' => 'required|string|min:7',
-        ]);
+    $user = User::where('email', $request->email)->first();
 
-        if ($validator->fails()) {
-            return response(['error' => $validator->errors()->first()], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $user = User::where('email', $request->email)->first();
-
-        if ($user) {
-            return  response()->json(['error' => 'Пользователь с таким email уже существует'], Response::HTTP_UNPROCESSABLE_ENTITY);
-        }
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        $token = Auth::login($user);
-
-        return $this->responWinthToken($token);
+    if ($user) {
+      return response()->json(['error' => 'Пользователь с таким email уже существует'], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        return response()->json(['message' => 'Successfully logged out']);
-    }
+    $user = User::create([
+      'name' => $request->name,
+      'email' => $request->email,
+      'password' => Hash::make($request->password),
+    ]);
 
-    public function refresh()
-    {
-        $token = auth()->refresh();
+    $token = Auth::login($user);
 
-        return $this->responWinthToken($token);
-    }
+    return $this->responWinthToken($token);
+  }
 
-    protected function responWinthToken($token) {
-        return response()->json([
-            'access_token' => $token,
-            'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
-        ]);
-    }
+  public function logout()
+  {
+    Auth::logout();
+    return response()->json(['message' => 'Successfully logged out']);
+  }
+
+  public function refresh()
+  {
+    $token = auth()->refresh();
+
+    return $this->responWinthToken($token);
+  }
 }
 

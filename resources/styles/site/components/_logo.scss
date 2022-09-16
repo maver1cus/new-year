@@ -1,0 +1,16 @@
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo__image {
+  width: 5rem;
+  margin-right: 0.9375rem;
+}
+
+.logo__text {
+  font-weight: 700;
+  font-family: "Roboto";
+  font-size: 2.1875rem;
+  color: $accent-color;
+}

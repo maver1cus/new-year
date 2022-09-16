@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Price extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $fillable = ['height', 'article', 'percent', 'price_low', 'price_old_low', 'price_middle', 'price_old_middle', 'price_high', 'price_old_high', 'product_id'];
+  protected $fillable = ['height', 'article', 'percent', 'price_low', 'price_old_low', 'price_middle', 'price_old_middle', 'price_high', 'price_old_high', 'product_id'];
 
-    public function label() {
-        return $this->hasOne(Label::class);
-    }
+  public function label()
+  {
+    return $this->hasOne(Label::class);
+  }
 }

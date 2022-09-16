@@ -1,0 +1,80 @@
+*,
+*::after,
+*:before {
+  box-sizing: border-box;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+
+  @include r(1024) {
+    font-size: 13px;
+  }
+
+  @include r(768) {
+    font-size: 9px;
+  }
+
+  @include r(425) {
+    font-size: 7px;
+  }
+
+  @include r(375) {
+    font-size: 6px
+  }
+
+  @include r(320) {
+    font-size: 5px;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+
+  @include r(1024) {
+    font-size: 15px;
+  }
+
+  @include r(768) {
+    font-size: 12px;
+  }
+
+  @include r(320) {
+    font-size: 5px;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+.content {
+  background-color: rgba($white-color, 0.8);
+  max-width: 66.875rem;
+  margin: 0 auto;
+  padding: 0;
+  height: 200vh;
+}
+
+main {
+  background-image: url('../../images/bg-body.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 0 50%;
+  background-size: cover;
+}
+
+.button {
+  background-color: $accent-color;
+  color: #3b3b3b;
+  text-transform: uppercase;
+  padding: 0.75rem 1.875rem;
+  border-radius: 1.875rem;
+  font-size: 1.25rem;
+  margin-top: .625rem;
+  box-shadow: none;
+  outline: none;
+}

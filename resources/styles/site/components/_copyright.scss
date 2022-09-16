@@ -1,0 +1,18 @@
+.copyright {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: .625rem;
+  font-size: .625rem;
+  color: $white-color;
+}
+
+.copyright__list {
+  @include reset-list;
+  width: 50%;
+}
+
+.copyright__text {
+  width: 100%;
+  font-size: 0.625rem;
+  color: $white-color;
+}
